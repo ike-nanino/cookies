@@ -12,16 +12,13 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 @layer base {
-  * {
-    cursor: none !important;
+  /* Hide default cursor only on non-touch devices */
+  @media (hover: hover) and (pointer: fine) {
+    * {
+      cursor: none !important;
+    }
   }
 }
 
