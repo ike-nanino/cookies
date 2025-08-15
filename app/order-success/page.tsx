@@ -1,14 +1,15 @@
-/* eslint-disable react/no-unescaped-entities */
-"use client";
+'use client';
 
+import { Suspense } from "react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Confetti from "react-confetti";
 
-export default function OrderSuccessPage() {
+function OrderSuccessPage() {
   const searchParams = useSearchParams();
-  const orderId = searchParams.get("orderId");
+  const orderId = searchParams.get("orderId")?.trim(); // Trim the one in the URL
+
   const [loading, setLoading] = useState(true);
   const [showConfetti, setShowConfetti] = useState(false);
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
@@ -28,22 +29,11 @@ export default function OrderSuccessPage() {
     const timer = setTimeout(() => {
       setLoading(false);
       setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 4000); // stop after 4s
+      setTimeout(() => setShowConfetti(false), 4000);
     }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
-
-  // if (loading) {
-  //   return (
-  //     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-  //       <div className="flex flex-col items-center">
-  //         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
-  //         <p className="text-gray-500 text-sm">Processing your order...</p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   if (!orderId) {
     return (
@@ -105,7 +95,9 @@ export default function OrderSuccessPage() {
         {/* Order Details */}
         <div className="bg-gray-50 rounded-lg p-4 mb-6 text-left">
           <p className="text-sm text-gray-500">Order Number</p>
-          <p className="font-mono text-blue-600 font-semibold">#{orderId?.slice(6)}</p>
+          <p className="font-mono text-blue-600 font-semibold">
+            #{orderId.slice(6)}
+          </p>
           <p className="text-sm text-gray-500 mt-3">Order Date</p>
           <p className="font-semibold">
             {new Date().toLocaleDateString(undefined, {
@@ -133,5 +125,22 @@ export default function OrderSuccessPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+          <div className="flex flex-col items-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+            <p className="text-gray-500 text-sm">Processing your order...</p>
+          </div>
+        </div>
+      }
+    >
+      <OrderSuccessPage />
+    </Suspense>
   );
 }
