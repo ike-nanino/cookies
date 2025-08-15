@@ -6,9 +6,9 @@ import { cakeData } from '../../constants/mockData';
 
 export default function CakesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-rose-100" style={{ backgroundImage: 'url(/images/cake-background.jpg)', backgroundSize: 'cover' }}>
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-rose-100">
       <div className="container mx-auto px-4 py-8">
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -19,7 +19,7 @@ export default function CakesPage() {
           <p className="text-center text-gray-600 mb-8">
             Exquisite cakes crafted with passion and the finest ingredients for every celebration
           </p>
-        </motion.div>
+        </motion.div> */}
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"

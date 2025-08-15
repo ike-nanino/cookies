@@ -22,12 +22,12 @@ export default function Navbar() {
             className="cursor-pointer"
             whileHover={{ scale: 1.05 }}
           >
-            <h1 className="text-2xl font-bold text-amber-600">Golden Crust</h1>
-            <p className="text-xs text-gray-600">Artisan Bakery</p>
+            <h1 className="text-base lg:text-xl font-bold text-amber-600">Parcs</h1>
+           
           </motion.div>
 
           {/* Navigation Links */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="text-xs lg:text-xl flex items-center gap-8">
             <button
               onClick={() => router.push('/')}
               className="text-gray-700 hover:text-amber-600 transition-colors font-medium"
@@ -35,34 +35,16 @@ export default function Navbar() {
               Home
             </button>
             <button
-              onClick={() => router.push('/bread')}
-              className="text-gray-700 hover:text-amber-600 transition-colors font-medium"
-            >
-              Breads
-            </button>
-            <button
-              onClick={() => router.push('/cake')}
-              className="text-gray-700 hover:text-amber-600 transition-colors font-medium"
-            >
-              Cakes
-            </button>
-            <button
-              onClick={() => router.push('/cookie')}
-              className="text-gray-700 hover:text-amber-600 transition-colors font-medium"
-            >
-              Cookies
-            </button>
-            <button
-              onClick={() => router.push('/pasta')}
-              className="text-gray-700 hover:text-amber-600 transition-colors font-medium"
-            >
-              Pasta
-            </button>
-            <button
               onClick={() => router.push('/about')}
               className="text-gray-700 hover:text-amber-600 transition-colors font-medium"
             >
               About
+            </button>
+            <button
+              onClick={() => router.push('/order')}
+              className="text-gray-700 hover:text-amber-600 transition-colors font-medium"
+            >
+              Orders
             </button>
           </div>
 

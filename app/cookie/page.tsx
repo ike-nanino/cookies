@@ -8,7 +8,7 @@ export default function CookiesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100" style={{ backgroundImage: 'url(/images/cookie-background.jpg)', backgroundSize: 'cover' }}>
       <div className="container mx-auto px-4 py-8">
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -19,7 +19,7 @@ export default function CookiesPage() {
           <p className="text-center text-gray-600 mb-8">
             Handcrafted daily with love and the finest ingredients
           </p>
-        </motion.div>
+        </motion.div> */}
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"

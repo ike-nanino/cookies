@@ -44,8 +44,8 @@ export default function CustomCursor() {
       <Image
         src="/icon/mouse1.png"
         alt="Custom Cursor"
-        width={20}
-        height={20}
+        width={15}
+        height={15}
       />
     </div>
   );

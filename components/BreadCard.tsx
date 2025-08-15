@@ -1,18 +1,19 @@
+// components/BreadCard.tsx
 'use client';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Plus, Minus, ShoppingCart } from 'lucide-react';
 import { useCartStore } from '../store/cartStore';
-import { Bread } from '../types/bread';
+import { BakeryItem } from '../constants/mockData';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 
 interface BreadCardProps {
-  bread: Bread;
+  bread: BakeryItem;
 }
 
-export default function BreadCard({ bread }: BreadCardProps) {
-  const { addItem, removeItem, getItemQuantity } = useCartStore();
+const BreadCard: React.FC<BreadCardProps> = ({ bread }) => {
   const router = useRouter();
+  const { addItem, removeItem, getItemQuantity } = useCartStore();
   const quantity = getItemQuantity(bread.id);
 
   const handleCardClick = (e: React.MouseEvent) => {
@@ -20,96 +21,92 @@ export default function BreadCard({ bread }: BreadCardProps) {
     router.push(`/order/${bread.id}`);
   };
 
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    addItem(bread);
-  };
-
-  const handleRemoveFromCart = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    removeItem(bread.id);
-  };
+  const handleAddToCart = () => addItem(bread);
+  const handleRemoveFromCart = () => removeItem(bread.id);
 
   return (
     <motion.div
       onClick={handleCardClick}
-      className="relative bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer group hover:shadow-xl transition-all duration-300"
+      className="relative rounded-xl shadow-lg overflow-hidden border border-amber-200 h-72 bg-cover bg-center group"
+      style={{ backgroundImage: `url(${bread.image})` }}
       whileTap={{ scale: 0.98 }}
     >
-      {/* Counter / Add Button */}
-      <div className="cart-button absolute top-4 right-4 z-10">
-        <AnimatePresence mode="wait" initial={false}>
+      {/* Zoom image on hover */}
+      <div
+        className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+        style={{ backgroundImage: `url(${bread.image})` }}
+      />
+
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+      {/* Price at top right */}
+      <span className="absolute top-3 right-3 bg-amber-500 px-3 py-1 rounded-full text-sm font-semibold text-white shadow-lg z-10">
+        ${bread.price.toFixed(2)}
+      </span>
+
+      {/* Content at bottom */}
+      <div className="absolute bottom-0 left-0 w-full p-4 text-white z-10">
+        <h3 className="text-lg font-bold leading-tight">{bread.name}</h3>
+
+        {/* Description with 2 lines */}
+        <p className="text-sm text-gray-200 line-clamp-2">{bread.description}</p>
+
+        {/* Ingredients as tags (max 4) */}
+        {bread.ingredients && bread.ingredients.length > 0 && (
+          <div className="flex flex-wrap gap-1 mt-2">
+            {bread.ingredients.slice(0, 4).map((ingredient, index) => (
+              <span
+                key={index}
+                className="bg-white/20 backdrop-blur-sm px-2 py-0.5 rounded-full text-xs text-white font-medium"
+              >
+                {ingredient}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Cart Buttons */}
+        <div className="mt-3 flex justify-between items-center cart-button">
           {quantity > 0 ? (
-            <motion.div
-              key="counter"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.2 }}
-              className="flex items-center gap-2 bg-white rounded-full shadow-md px-2 py-1"
-            >
+            <div className="flex items-center space-x-3">
               <motion.button
-                onClick={handleRemoveFromCart}
-                className="bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                onClick={handleRemoveFromCart}
+                className="bg-red-100/80 hover:bg-red-200 text-red-600 p-1.5 rounded-full transition-colors shadow-sm"
               >
                 <Minus size={16} />
               </motion.button>
 
-              <motion.span
-                key={quantity} // triggers animation on number change
-                initial={{ opacity: 0, y: -5 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 5 }}
-                transition={{ duration: 0.15 }}
-                className="text-sm font-semibold text-gray-800 w-5 text-center"
-              >
+              <span className="text-lg font-semibold min-w-[2rem] text-center">
                 {quantity}
-              </motion.span>
+              </span>
 
               <motion.button
-                onClick={handleAddToCart}
-                className="bg-amber-500 hover:bg-amber-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                onClick={handleAddToCart}
+                className="bg-amber-100/80 hover:bg-amber-200 text-amber-600 p-1.5 rounded-full transition-colors shadow-sm"
               >
                 <Plus size={16} />
               </motion.button>
-            </motion.div>
+            </div>
           ) : (
             <motion.button
-              key="plus-only"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={handleAddToCart}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.2 }}
-              className="bg-amber-500 hover:bg-amber-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              className="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-lg font-semibold flex items-center space-x-2 transition-colors shadow-md hover:shadow-lg text-sm"
             >
-              <Plus size={16} />
+              <ShoppingCart size={14} />
+              <span>Add</span>
             </motion.button>
           )}
-        </AnimatePresence>
-      </div>
-
-      {/* Bread Image */}
-      <div className="relative h-48 overflow-hidden">
-        <Image
-          src={bread.image}
-          alt={bread.name}
-          fill
-          className="object-cover group-hover:scale-110 transition-transform duration-300"
-        />
-      </div>
-
-      {/* Bread Info */}
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-800 mb-2">{bread.name}</h3>
-        <p className="text-xl font-bold text-amber-600">${bread.price.toFixed(2)}</p>
+        </div>
       </div>
     </motion.div>
   );
-}
+};
+
+export default BreadCard;

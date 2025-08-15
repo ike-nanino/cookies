@@ -22,9 +22,16 @@ export default function CartPage() {
     }
   };
 
+   
   const handleCheckout = () => {
-    alert('Proceeding to secure checkout...');
-    // clearCart(); // Uncomment to clear cart after checkout
+    // Check if cart has items
+    if (items.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+
+    // Navigate to checkout page
+    router.push('/checkout');
   };
 
   if (items.length === 0) {
@@ -54,12 +61,12 @@ export default function CartPage() {
             </p>
             
             <motion.button
-              onClick={() => router.push('/orders')}
+              onClick={() => router.push('/order')}
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              Browse Our Menu
+              Our Menu
             </motion.button>
           </div>
         </motion.div>
@@ -79,7 +86,7 @@ export default function CartPage() {
         >
           <div className="flex items-center gap-4">
             <motion.button
-              onClick={() => router.push('/orders')}
+              onClick={() => router.push('/order')}
               className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors bg-white/60 backdrop-blur-sm px-4 py-2 rounded-xl hover:bg-white/80 border border-white/30"
               whileHover={{ x: -5 }}
             >

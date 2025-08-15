@@ -19,7 +19,7 @@ export default function CartButton() {
   return (
     <motion.button
       onClick={handleCartClick}
-      className="relative flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg font-medium cursor-pointer transition-colors shadow-lg"
+      className="relative hidden lg:flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg font-medium cursor-pointer transition-colors shadow-lg"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >

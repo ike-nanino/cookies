@@ -1,7 +1,7 @@
 // app/order/[id]/page.tsx
 'use client';
 import { motion } from 'framer-motion';
-import { Plus, Minus, ArrowLeft, ShoppingCart } from 'lucide-react';
+import { Plus, Minus, ArrowLeft, ShoppingCart, Heart, Share2 } from 'lucide-react';
 import { useCartStore } from '../../../store/cartStore';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -132,7 +132,24 @@ export default function OrderPage({ params }: OrderPageProps) {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
               />
             </div>
-
+            
+            {/* Action Buttons */}
+            <div className="flex gap-3 mt-4 justify-center lg:justify-start">
+              <motion.button
+                className="p-3 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-white/30 text-gray-600 hover:text-red-500 transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Heart size={20} />
+              </motion.button>
+              <motion.button
+                className="p-3 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-white/30 text-gray-600 hover:text-blue-500 transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Share2 size={20} />
+              </motion.button>
+            </div>
           </motion.div>
 
           {/* Item Details */}
