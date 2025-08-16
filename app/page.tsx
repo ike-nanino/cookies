@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -37,7 +37,7 @@ const Homepage: React.FC = () => {
             y: -progress * 150, // less upward movement
             opacity: Math.max(0, 1 - progress * 1.0), // slower fade-out
             duration: 0.1,
-            ease: "power2.out"
+            ease: "power2.out",
           });
 
           // Navbar + logo fade in
@@ -47,20 +47,28 @@ const Homepage: React.FC = () => {
               scale: 0.85 + navProgress * 0.15,
               opacity: navProgress,
               duration: 0.2,
-              ease: "power2.out"
+              ease: "power2.out",
             });
             gsap.to(navbarLogoRef.current, {
               scale: 0.6 + navProgress * 0.4,
               opacity: navProgress,
               duration: 0.2,
-              ease: "power2.out"
+              ease: "power2.out",
             });
           } else {
-            gsap.to(navbarRef.current, { scale: 0.85, opacity: 0, duration: 0.2 });
-            gsap.to(navbarLogoRef.current, { scale: 0.6, opacity: 0, duration: 0.2 });
+            gsap.to(navbarRef.current, {
+              scale: 0.85,
+              opacity: 0,
+              duration: 0.2,
+            });
+            gsap.to(navbarLogoRef.current, {
+              scale: 0.6,
+              opacity: 0,
+              duration: 0.2,
+            });
           }
-        }
-      }
+        },
+      },
     });
 
     return () => {
@@ -84,7 +92,10 @@ const Homepage: React.FC = () => {
       </video>
 
       {/* Navbar */}
-      <nav ref={navbarRef} className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-lg">
+      <nav
+        ref={navbarRef}
+        className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-lg"
+      >
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div ref={navbarLogoRef} className="flex items-center">
             <Link href="/" className="block">
@@ -100,15 +111,45 @@ const Homepage: React.FC = () => {
           </div>
 
           <div className="hidden md:flex space-x-8">
-            <Link href="/about" className="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium">About</Link>
-            <Link href="/services" className="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium">Services</Link>
-            <Link href="/projects" className="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium">Projects</Link>
-            <Link href="/contact" className="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium">Contact</Link>
+            <Link
+              href="/about"
+              className="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium"
+            >
+              About
+            </Link>
+            <Link
+              href="/services"
+              className="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium"
+            >
+              Services
+            </Link>
+            <Link
+              href="/projects"
+              className="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium"
+            >
+              Projects
+            </Link>
+            <Link
+              href="/contact"
+              className="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium"
+            >
+              Contact
+            </Link>
           </div>
 
           <button className="md:hidden p-2 text-gray-800">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           </button>
         </div>
@@ -127,78 +168,97 @@ const Homepage: React.FC = () => {
           />
         </div>
       </section>
- <section className="relative z-10 min-h-screen py-20">
-        {/* Semi-transparent overlay for this section to improve readability */}
-        {/* <div className="absolute inset-0 bg-black/50 -z-5"></div> */}
-        
+
+      <section className="relative z-10 min-h-screen py-20">
+        {/* Semi-transparent warm brown overlay for readability */}
+        {/* <div className="absolute inset-0 bg-[#5c3d2e]/60 -z-5"></div> */}
+
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 text-center">
-              Welcome to Parcs
+              Welcome to Parcs Bakery
             </h2>
             <p className="text-xl text-white/90 text-center mb-16 leading-relaxed">
-              Discover amazing experiences and create lasting memories with us
+              Where every loaf, cake, and pastry is crafted with care,
+              tradition, and a touch of love.
             </p>
-            
+
             <div className="grid md:grid-cols-2 gap-12 mb-16">
+              {/* Vision */}
               <div className="space-y-6 bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
                 <h3 className="text-2xl font-semibold text-white">
                   Our Vision
                 </h3>
                 <p className="text-white/90 leading-relaxed">
-                  At Parcs, we believe in creating extraordinary experiences that connect people 
-                  with nature and each other. Our mission is to provide sustainable and memorable 
-                  outdoor adventures for everyone.
+                  At Parcs, baking is more than a craft — it’s our heritage. We
+                  strive to bring warmth to every home with fresh, wholesome,
+                  and delicious baked goods that bring people together.
                 </p>
-                <Link 
+                <Link
                   href="/about"
-                  className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition-colors duration-300"
+                  className="inline-flex items-center text-[#d4a373] hover:text-[#e6b98a] font-medium transition-colors duration-300"
                 >
-                  Learn More 
-                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  Learn More
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
                   </svg>
                 </Link>
               </div>
-              
+
+              {/* What We Offer */}
               <div className="space-y-6 bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
                 <h3 className="text-2xl font-semibold text-white">
                   What We Offer
                 </h3>
                 <ul className="space-y-4">
                   <li className="flex items-start">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span className="text-white/90">Guided Nature Tours</span>
+                    <span className="w-2 h-2 bg-[#d4a373] rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    <span className="text-white/90">Freshly Baked Breads</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span className="text-white/90">Adventure Activities</span>
+                    <span className="w-2 h-2 bg-[#d4a373] rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    <span className="text-white/90">
+                      Artisan Cakes & Pastries
+                    </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span className="text-white/90">Educational Programs</span>
+                    <span className="w-2 h-2 bg-[#d4a373] rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    <span className="text-white/90">Handcrafted Cookies</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span className="text-white/90">Conservation Initiatives</span>
+                    <span className="w-2 h-2 bg-[#d4a373] rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    <span className="text-white/90">
+                      Seasonal & Custom Orders
+                    </span>
                   </li>
                 </ul>
               </div>
             </div>
 
+            {/* CTA Buttons */}
             <div className="text-center">
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link 
-                  href="/explore"
-                  className="bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-300 shadow-lg backdrop-blur-sm"
+                <Link
+                  href="/order"
+                  className="bg-[#8c5e3c] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#6f4830] transition-colors duration-300 shadow-lg backdrop-blur-sm"
                 >
-                  Explore Now
+                  Order Now
                 </Link>
-                <Link 
+                <Link
                   href="/contact"
                   className="border-2 border-white/50 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-all duration-300 backdrop-blur-sm"
                 >
-                  Contact Us
+                  Visit Us
                 </Link>
               </div>
             </div>
